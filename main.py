@@ -8,6 +8,7 @@ highlight_gray = '#181818'
 darker_white = '#cecece'
 
 def main():
+
     window = Tk()
     window.title("Calculator")
     window.minsize(288, 275)
@@ -166,7 +167,7 @@ def main():
         highlightbackground = highlight_gray, 
         highlightthickness = thickness, 
         relief = 'flat', 
-        text = 'x²', 
+        text = 'xʸ', 
         font = ('Trebuchet', 14), 
         width = 3, 
         command = lambda: add_character('^', entry_box), 

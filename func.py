@@ -12,26 +12,34 @@ def clear_entry(entry_box):
 
 def result(entry_box):
     entry_string  = entry_box.get()
+
+    exponents = "⁰¹²³⁴⁵⁶⁷⁸⁹"
+    numbers = "0123456789"
+
+    for n in range(len(exponents)):
+        if exponents[n] in entry_string:
+            entry_string = sub(exponents[n], f"**{numbers[n]}", entry_string)
+            print(entry_string)
+
     if "%" in entry_string:
         entry_string = sub('%', '/100 ', entry_string)
 
     if "^" in entry_string:
-        entry_string = sub('^', '** ', entry_string) 
+        entry_string = sub('\^', '**', entry_string)
 
     if "√" in entry_string:
-        numeros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
         splitted_expression = entry_string.split('√')
 
-        for a in range(len(splitted_expression)):
-            splitted_expression[a] = splitted_expression[a].strip(" ")
+        for n in range(len(splitted_expression)):
+            splitted_expression[n] = splitted_expression[n].strip(" ")
             
         entry_string = splitted_expression[0]
 
         for part in splitted_expression[1:]:
             fin_idx = 0
             
-            while fin_idx < len(part) and part[fin_idx] in numeros:
+            while fin_idx < len(part) and (part[fin_idx] in numbers or part[fin_idx] == '.'):
                 fin_idx += 1
                 
             part = " (" +  part[:fin_idx] + " ** 0.5)" + part[fin_idx:]
