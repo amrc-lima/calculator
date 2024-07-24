@@ -1,4 +1,5 @@
-from tkinter import Tk, Entry, Button, Frame
+from tkinter import Tk, Button, Frame, Entry
+from func import *
 
 button_gray = '#373737'
 background_gray = '#2c2c2c'
@@ -32,7 +33,7 @@ def main():
     padding = 1
     thickness = 1
 
-    Entry(
+    entry_box = Entry(
         frame1,
         bg = '#272727', 
         fg = 'white', 
@@ -40,8 +41,9 @@ def main():
         highlightthickness = thickness, 
         highlightbackground = highlight_gray,
         relief = 'flat', 
-        ).grid(sticky = 'nsew', pady = padding)
-
+        )
+    entry_box.grid(sticky = 'nsew', pady = padding)
+    entry_box.config(cursor = 'xterm')
 
     Button(
         frame2, 
@@ -55,6 +57,7 @@ def main():
         text = '⌫', 
         font = ('Trebuchet', 14), 
         width = 3,
+        command = lambda: clear_entry(entry_box)
         ).grid(row = 0, column = 0, padx = padding, pady = padding, sticky = 'nsew')
 
     Button(
@@ -69,6 +72,7 @@ def main():
         text = 'C', 
         font = ('Trebuchet', 14, 'bold'), 
         width = 3,
+        command = lambda: entry_box.delete(0, END), 
         ).grid(row = 0, column = 1, padx = padding, pady = padding, sticky = 'nsew')
     
 
@@ -86,6 +90,7 @@ def main():
             text = n, 
             font = ('Trebuchet', 14), 
             width = 3,
+            command = lambda n = n: add_character(n, entry_box), 
             ).grid(row = 0, column = pos_column, padx = padding, pady = padding, sticky = 'nsew')
         pos_column += 1
         
@@ -103,6 +108,7 @@ def main():
             text = n, 
             font = ('Trebuchet', 14), 
             width = 3,
+            command = lambda n = n: add_character(n, entry_box), 
             ).grid(row = pos_row, column = 3, padx = padding, pady = padding, sticky = 'nsew')
         pos_row += 1
 
@@ -115,9 +121,10 @@ def main():
         highlightbackground = highlight_gray, 
         highlightthickness = thickness, 
         relief = 'flat', 
-        text = ',', 
+        text = '.', 
         font = ('Trebuchet', 14), 
         width = 3, 
+        command = lambda: add_character('.', entry_box), 
         ).grid(row = 4, column = 2, padx = padding, pady = padding, sticky = 'nsew')
 
     Button(
@@ -132,6 +139,7 @@ def main():
         text = '%', 
         font = ('Trebuchet', 14), 
         width = 3, 
+        command = lambda: add_character('%', entry_box), 
         ).grid(row = 4, column = 1, padx = padding, pady = padding, sticky = 'nsew')
 
     Button(
@@ -146,6 +154,7 @@ def main():
         text = '√', 
         font = ('Trebuchet', 14), 
         width = 3, 
+        command = lambda: add_character('√', entry_box), 
         ).grid(row = 5, column = 0, padx = padding, pady = padding, sticky = 'nsew')
 
     Button(
@@ -157,9 +166,10 @@ def main():
         highlightbackground = highlight_gray, 
         highlightthickness = thickness, 
         relief = 'flat', 
-        text = '^', 
+        text = 'x²', 
         font = ('Trebuchet', 14), 
         width = 3, 
+        command = lambda: add_character('^', entry_box), 
         ).grid(row = 5, column = 1, padx = padding, pady = padding, sticky = 'nsew')
 
     Button(
@@ -173,6 +183,7 @@ def main():
         relief = 'flat', 
         text = '=', 
         font = ('Trebuchet', 14),
+        command = lambda: result(entry_box), 
         ).grid(row = 5, column = 2, padx = padding, pady = padding, sticky = 'nsew', columnspan=2)
 
 
@@ -197,6 +208,7 @@ def main():
                 text = n, 
                 font = ('Trebuchet', 14), 
                 width = 3,
+                command = lambda n = n: add_character(n, entry_box)
                 ).grid(
                     row = pos_row + 1, 
                     column = pos_column, 
@@ -205,6 +217,7 @@ def main():
                     pady = padding, 
                     )
 
+    
 
 
 
